@@ -7,5 +7,10 @@ end
 
 get '/:bucket' do
 	@image = ImageBucket.new(params[:bucket]).pick_one_url
-	erb :show
+
+	if request.xhr?
+		@image
+	else
+		erb :show
+	end
 end
