@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'aws/s3'
+
+include AWS::S3
+
+Base.establish_connection!(
+	:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+	:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
+
+USAGE = "inload <local_directory> <bucket>"
+dir = ARGV.shift or abort(USAGE)
+bucket = ARGV.shift or abort(USAGE)
+
+def md5(file)
+	hash = `md5 "#{file}"`.split.last
+	raise "couldn't get md5 for #{file}" unless $?.success?
+	hash
+end
+
+abort("No md5 command") unless md5($0).match(/^[0-9a-f]{32}$/)
+
+buckets = Service.buckets.map { |b| b.name }
+Bucket.create(bucket) unless buckets.include? bucket
+
+Dir[dir + '/*.jpg'].each do |fname|
+	key = md5(fname)
+	printf "%s -> %s\n", key, fname
+	S3Object.store("#{key}.jpg", File.read(fname), bucket, :access => :public_read)
+end
