@@ -1,2 +1,8 @@
 body {
+	background: black;
+}
+
+img {
+	display: block;
+	margin: auto;
 }
