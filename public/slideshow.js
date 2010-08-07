@@ -1,3 +1,6 @@
+var timeoutId = null
+var paused = false
+
 cycle = function() {
 	$.ajax({
 		url: document.URL,
@@ -11,12 +14,27 @@ cycle = function() {
 					newImg.hide()
 					oldImg.replaceWith(newImg)
 					$('img').fadeIn(1000)
-					setTimeout(function() { cycle() }, 3000)
+					if (!paused)
+						timeoutId = setTimeout(function() { cycle() }, 3000)
 				}, 1000)
 			}, 1010)
 		}
 	})
 }
+
+$(document).click(function() {
+	paused = !paused
+	console.log("paused = " + paused)
+
+	if (paused) {
+		$('#pause').show()
+		clearTimeout(timeoutId)
+	}
+	else {
+		$('#pause').hide()
+		cycle()
+	}
+})
 
 $(document).ready(function() {
 	cycle()

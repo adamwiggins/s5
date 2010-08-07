@@ -6,3 +6,15 @@ img {
 	display: block;
 	margin: auto;
 }
+
+#pause {
+	background: url('/pause.png') no-repeat;
+	width: 128px;
+	height: 128px;
+	position: absolute;
+	top: 32px;
+	left: 32px;
+	z-index: 1;
+	opacity: 0.4;
+	display: none;
+}
