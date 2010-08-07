@@ -21,6 +21,7 @@ cycle = function() {
 					fitToWindow(newImg)
 					newImg.hide()
 					oldImg.replaceWith(newImg)
+					console.log(data)
 					$('img').fadeIn(10*1000)
 					if (!paused)
 						timeoutId = setTimeout(function() { cycle() }, 40*1000)
