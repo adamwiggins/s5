@@ -6,10 +6,8 @@ get '/' do
 end
 
 get '/:bucket' do
-	@image = ImageBucket.new(params[:bucket]).pick_one_url
-
 	if request.xhr?
-		@image
+		ImageBucket.new(params[:bucket]).pick_one_url
 	else
 		erb :show
 	end
