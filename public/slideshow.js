@@ -13,7 +13,7 @@ cycle = function() {
 		url: document.URL,
 		success: function(data) {
 			var oldImg = $('img')
-			oldImg.fadeOut(1000)
+			oldImg.fadeOut(10*1000)
 			setTimeout(function() {
 				var newImg = $('<img>')
 				newImg.attr('src', data)
@@ -21,11 +21,11 @@ cycle = function() {
 					fitToWindow(newImg)
 					newImg.hide()
 					oldImg.replaceWith(newImg)
-					$('img').fadeIn(1000)
+					$('img').fadeIn(10*1000)
 					if (!paused)
-						timeoutId = setTimeout(function() { cycle() }, 3000)
-				}, 1000)
-			}, 1010)
+						timeoutId = setTimeout(function() { cycle() }, 40*1000)
+				}, 1000)        // wait for image load
+			}, 10*1000 + 10)   // wait for fadeout
 		}
 	})
 }
