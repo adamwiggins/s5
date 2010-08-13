@@ -1,0 +1,27 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
+    builder (2.1.2)
+    daemons (1.1.0)
+    eventmachine (0.12.10)
+    mime-types (1.16)
+    rack (1.2.1)
+    sinatra (1.0)
+      rack (>= 1.0)
+    thin (1.2.7)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    xml-simple (1.0.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-s3 (= 0.6.2)
+  sinatra (= 1.0)
+  thin (= 1.2.7)
